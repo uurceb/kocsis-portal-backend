@@ -4,6 +4,7 @@
 // =============================================================================
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/local');
+//mongoose.connect('mongodb://admin:123456@ds161032.mlab.com:61032/kocsis-portal-db');
 var Phase = require('./app/models/phase');
 var Project = require('./app/models/project');
 var EstimatingFactor = require('./app/models/estimatingfactor');
@@ -174,7 +175,7 @@ router.route('/estimatingfactors')
     });
 
 router.route('/statistics').get(function (req, res) {
-    statistics = { projectCount: 0, phaseCount: 0, estFactCount: 0 };
+    statistics = { projectCount: 0, phaseCount: 0, estFactCount: 0, projectCostProfitData:[] };
     Project.count({}, function (err, count) {
         statistics.projectCount = count;
         Phase.count({}, function (err, count) {
