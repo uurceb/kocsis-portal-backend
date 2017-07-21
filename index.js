@@ -5,6 +5,7 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/local');
 //mongoose.connect('mongodb://admin:123456@ds161032.mlab.com:61032/kocsis-portal-db');
+var Project = require('./app/models/project');
 var Phase = require('./app/models/phase');
 var EstimatingFactor = require('./app/models/estimatingFactor');
 

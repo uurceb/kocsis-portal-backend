@@ -28,6 +28,14 @@ exports.readAEstimationFactor = function (req, res) {
     });
 };
 
+exports.readEstimationFactorsByProjectId = function (req, res) {
+    EstimationFactor.find({_project:req.params._id}, function (err, estFacta) {
+        if (err)
+            res.send(err);
+        res.json(estFacta);
+    });
+};
+
 exports.updateAEstimationFactor = function (req, res) {
     EstimationFactor.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, function (err, estFact) {
         if (err)

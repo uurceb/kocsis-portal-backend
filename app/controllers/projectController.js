@@ -1,6 +1,9 @@
 'use strict';
 
 var Project = require('../models/project');
+var Phase = require('../models/phase');
+var EstimationFactor = require('../models/estimatingFactor');
+
 var mongoose = require('mongoose');
 
 exports.listAllProjects = function (req, res) {
@@ -39,9 +42,18 @@ exports.updateAProject = function (req, res) {
 exports.deleteAProject = function (req, res) {
     Project.remove({
         _id: req.body._id
-    }, function (err, task) {
-        if (err)
-            res.send(err);
-        res.json({ message: 'Project successfully deleted' });
+    }, function (err) {
+        Phase.remove({
+            _project: req.body._id
+        }, function (err) {
+            EstimationFactor.remove({
+                _project: req.body._id
+            }, function (err) {
+                res.json({ message: 'project successfully deleted' });
+            });
+        });
     });
+
+
+
 };

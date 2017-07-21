@@ -27,6 +27,13 @@ exports.readAPhase = function (req, res) {
         res.json(phase);
     });
 };
+exports.readAPhaseByProjectId = function (req, res) {
+    Phase.find({_project:req.params._id}, function (err, phase) {
+        if (err)
+            res.send(err);
+        res.json(phase);
+    });
+};
 
 exports.updateAPhase = function (req, res) {
     Phase.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, function (err, phase) {
