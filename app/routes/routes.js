@@ -5,6 +5,8 @@ module.exports = function (router) {
   var estFact = require('../controllers/estFactController');
   var component = require('../controllers/componentController');
   var complexity = require('../controllers/complexityController');
+  var category = require('../controllers/categoryController');
+  var inventoryItem = require('../controllers/inventoryItemController');
   // project Routes
   router.route('/projects')
     .get(project.listAllProjects)
@@ -35,14 +37,29 @@ module.exports = function (router) {
 
   router.route('/estimatingfactors/:_id')
     .get(estFact.readAEstimationFactor);
-  router.route('/estimatingfactors/getEstFactorsByProjectId/:_id')
-    .get(estFact.readEstimationFactorsByProjectId);
+  router.route('/estimatingfactors/getEstFactorsByCatId/:_id')
+    .get(estFact.readEstimationFactorsByCatId);
 
   router.route('/components')
     .get(component.listAllComponents)
     .post(component.createAComponent);
+    
+  router.route('/components/getCompByCatId/:_id')
+  .get(component.readComponentsByCatId);
 
   router.route('/complexities')
     .get(complexity.listAllComplexities)
     .post(complexity.createAComplexity);
+
+    router.route('/categories')
+    .get(category.listAllCategories)
+    .post(category.createACategory);
+
+  router.route('/inventoryitems')
+    .get(inventoryItem.listAllInventoryItems)
+    .post(inventoryItem.createAnInventoryItem)
+    .delete(inventoryItem.deleteAnInventoryItem);
+
+  router.route('/inventoryitems/getInventoryItemsByProjectId/:_id')
+    .get(inventoryItem.readInventoryItemsByProjectId)
 };

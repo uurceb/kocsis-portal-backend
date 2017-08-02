@@ -3,6 +3,7 @@ var Schema       = mongoose.Schema;
 
 var ProjectSchema   = new Schema({
         ObjectId: String,
+        _category:{type:String,ref:'Category'},
         projectName : String,
         customer : String,
         description : String

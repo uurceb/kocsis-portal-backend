@@ -3,11 +3,11 @@
 var Project = require('../models/project');
 var Phase = require('../models/phase');
 var EstimationFactor = require('../models/estimatingFactor');
-
+var InventoryItem = require('../models/inventoryItem');
 var mongoose = require('mongoose');
 
 exports.listAllProjects = function (req, res) {
-    Project.find({}, function (err, projects) {
+    Project.find({}).populate('_category','categoryName').exec(function (err, projects) {
         if (err)
             res.send(err);
         res.json(projects);
@@ -16,6 +16,7 @@ exports.listAllProjects = function (req, res) {
 
 exports.createAProject = function (req, res) {
     var newProject = new Project(req.body);
+    console.log(req.body);
     newProject.save(function (err, project) {
         if (err)
             res.send(err);
@@ -49,11 +50,12 @@ exports.deleteAProject = function (req, res) {
             EstimationFactor.remove({
                 _project: req.body._id
             }, function (err) {
-                res.json({ message: 'project successfully deleted' });
+                InventoryItem.remove({ _project: req.body._id }, function (err) {
+                    res.json({ message: 'project successfully deleted' });
+                });
             });
         });
+
     });
-
-
 
 };

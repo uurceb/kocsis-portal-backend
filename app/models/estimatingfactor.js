@@ -3,7 +3,7 @@ var Schema       = mongoose.Schema;
 
 var EstimatingFactorSchema   = new Schema({
     	ObjectId: String,
-        _project : {type:String,ref:'Project'},
+        _category : {type:String,ref:'Category'},
         component : String,
         complexity : String,
         newOrModified : String,

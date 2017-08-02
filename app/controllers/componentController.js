@@ -19,3 +19,11 @@ exports.createAComponent = function (req, res) {
         res.json(component);
     });
 };
+
+exports.readComponentsByCatId = function (req, res) {
+    Component.find({ _category: req.params._id }, function (err, components) {
+        if (err)
+            res.send(err);
+        res.json(components);
+    });
+};

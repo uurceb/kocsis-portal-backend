@@ -4,7 +4,7 @@ var EstimationFactor = require('../models/estimatingFactor');
 var mongoose = require('mongoose');
 
 exports.listAllEstimationFactors = function (req, res) {
-    EstimationFactor.find({}).populate('_project', 'projectName').exec(function (err, estFacts) {
+    EstimationFactor.find({}).populate('_category', 'categoryName').exec(function (err, estFacts) {
         if (err)
             res.send(err);
         res.json(estFacts);
@@ -28,8 +28,8 @@ exports.readAEstimationFactor = function (req, res) {
     });
 };
 
-exports.readEstimationFactorsByProjectId = function (req, res) {
-    EstimationFactor.find({_project:req.params._id}, function (err, estFacta) {
+exports.readEstimationFactorsByCatId = function (req, res) {
+    EstimationFactor.find({ _category: req.params._id }, function (err, estFacta) {
         if (err)
             res.send(err);
         res.json(estFacta);
@@ -47,7 +47,7 @@ exports.updateAEstimationFactor = function (req, res) {
 exports.deleteAEstimationFactor = function (req, res) {
     EstimationFactor.remove({
         _id: req.body._id
-    }, function (err, task) {
+    }, function (err, estimationFactor) {
         if (err)
             res.send(err);
         res.json({ message: 'EstimationFactor successfully deleted' });
