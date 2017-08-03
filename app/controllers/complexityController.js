@@ -19,3 +19,13 @@ exports.createAComplexity = function (req, res) {
         res.json(complexity);
     });
 };
+
+exports.deleteAComplexity = function (req, res) {
+    Complexity.remove({
+        _id: req.body._id
+    }, function (err, task) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Complexity successfully deleted' });
+    });
+};

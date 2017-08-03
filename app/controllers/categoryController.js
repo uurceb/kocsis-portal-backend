@@ -19,3 +19,13 @@ exports.createACategory = function (req, res) {
         res.json(category);
     });
 };
+
+exports.deleteACategory = function (req, res) {
+    Category.remove({
+        _id: req.body._id
+    }, function (err, task) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Category successfully deleted' });
+    });
+};

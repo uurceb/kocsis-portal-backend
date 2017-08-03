@@ -6,6 +6,7 @@ module.exports = function (router) {
   var component = require('../controllers/componentController');
   var complexity = require('../controllers/complexityController');
   var category = require('../controllers/categoryController');
+  var status = require('../controllers/statusController');
   var inventoryItem = require('../controllers/inventoryItemController');
   // project Routes
   router.route('/projects')
@@ -42,18 +43,26 @@ module.exports = function (router) {
 
   router.route('/components')
     .get(component.listAllComponents)
-    .post(component.createAComponent);
-    
+    .post(component.createAComponent)
+    .delete(component.deleteAComponent);
+
   router.route('/components/getCompByCatId/:_id')
-  .get(component.readComponentsByCatId);
+    .get(component.readComponentsByCatId);
 
   router.route('/complexities')
     .get(complexity.listAllComplexities)
-    .post(complexity.createAComplexity);
+    .post(complexity.createAComplexity)
+    .delete(complexity.deleteAComplexity);
 
-    router.route('/categories')
+  router.route('/categories')
     .get(category.listAllCategories)
-    .post(category.createACategory);
+    .post(category.createACategory)
+    .delete(category.deleteACategory);
+
+    router.route('/projectstatus')
+    .get(status.listAllStatus)
+    .post(status.createAStatus)
+    .delete(status.deleteAStatus);
 
   router.route('/inventoryitems')
     .get(inventoryItem.listAllInventoryItems)

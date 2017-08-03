@@ -27,3 +27,13 @@ exports.readComponentsByCatId = function (req, res) {
         res.json(components);
     });
 };
+
+exports.deleteAComponent = function (req, res) {
+    Component.remove({
+        _id: req.body._id
+    }, function (err, task) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Component successfully deleted' });
+    });
+};
