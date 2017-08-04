@@ -7,7 +7,7 @@ var InventoryItem = require('../models/inventoryItem');
 var mongoose = require('mongoose');
 
 exports.listAllProjects = function (req, res) {
-    Project.find({}).populate('_category','categoryName').exec(function (err, projects) {
+    Project.find({}).populate('_category','categoryName').populate('_status').exec(function (err, projects) {
         if (err)
             res.send(err);
         res.json(projects);
@@ -25,7 +25,7 @@ exports.createAProject = function (req, res) {
 };
 
 exports.readAProject = function (req, res) {
-    Project.findById(req.params._id, function (err, project) {
+    Project.findById(req.params._id).populate('_category').populate('_status').exec(function (err, project) {
         if (err)
             res.send(err);
         res.json(project);
