@@ -29,10 +29,10 @@ exports.readAEstimationFactor = function (req, res) {
 };
 
 exports.readEstimationFactorsByCatId = function (req, res) {
-    EstimationFactor.find({ _category: req.params._id }, function (err, estFacta) {
+    EstimationFactor.find({ _category: req.params._id }, function (err, estFacts) {
         if (err)
             res.send(err);
-        res.json(estFacta);
+        res.json(estFacts);
     });
 };
 
