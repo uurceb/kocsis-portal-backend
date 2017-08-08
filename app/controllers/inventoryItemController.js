@@ -20,7 +20,7 @@ exports.createAnInventoryItem = function (req, res) {
     });
 };
 exports.readInventoryItemsByProjectId = function (req, res) {
-    InventoryItem.find({ _project: req.params._id }).populate('_estfactor').exec( function (err, inventoryItems) {
+    InventoryItem.find({ _project: req.params._id }).populate('_estfactor').populate('_project').exec( function (err, inventoryItems) {
         if (err)
             res.send(err);
         res.json(inventoryItems);

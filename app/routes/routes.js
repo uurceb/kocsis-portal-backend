@@ -12,7 +12,8 @@ module.exports = function (router) {
   router.route('/projects')
     .get(project.listAllProjects)
     .post(project.createAProject)
-    .delete(project.deleteAProject);
+    .delete(project.deleteAProject)
+    .put(project.updateAProject);
 
   router.route('/projects/:_id')
     .get(project.readAProject);

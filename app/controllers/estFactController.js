@@ -29,7 +29,7 @@ exports.readAEstimationFactor = function (req, res) {
 };
 
 exports.readEstimationFactorsByCatId = function (req, res) {
-    EstimationFactor.find({ _category: req.params._id }, function (err, estFacts) {
+    EstimationFactor.find({ _category: req.params._id }).populate('_category', 'categoryName').exec(function (err, estFacts) {
         if (err)
             res.send(err);
         res.json(estFacts);

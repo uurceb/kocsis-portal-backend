@@ -28,7 +28,7 @@ exports.readAPhase = function (req, res) {
     });
 };
 exports.readAPhaseByProjectId = function (req, res) {
-    Phase.find({_project:req.params._id}, function (err, phase) {
+    Phase.find({_project:req.params._id}).populate('_project', 'projectName').exec(function (err, phase) {
         if (err)
             res.send(err);
         res.json(phase);
