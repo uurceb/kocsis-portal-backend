@@ -8,6 +8,8 @@ module.exports = function (router) {
   var category = require('../controllers/categoryController');
   var status = require('../controllers/statusController');
   var inventoryItem = require('../controllers/inventoryItemController');
+  var user = require('../controllers/userController');
+  var comment = require('../controllers/commentController');
   // project Routes
   router.route('/projects')
     .get(project.listAllProjects)
@@ -72,4 +74,17 @@ module.exports = function (router) {
 
   router.route('/inventoryitems/getInventoryItemsByProjectId/:_id')
     .get(inventoryItem.readInventoryItemsByProjectId)
+
+  router.route('/users')
+    .get(user.listAllUsers)
+    .post(user.createAUser)
+    .delete(user.deleteAUser);
+
+    router.route('/comments')
+    .get(comment.listAllComments)
+    .post(comment.createAComment)
+    .delete(comment.deleteAComment);
+
+    router.route('/comments/getCommentsByObjectId/:_id')
+    .get(comment.readCommentsByProjectId)
 };

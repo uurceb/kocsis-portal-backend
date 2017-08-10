@@ -23,7 +23,7 @@ exports.createAComplexity = function (req, res) {
 exports.deleteAComplexity = function (req, res) {
     Complexity.remove({
         _id: req.body._id
-    }, function (err, task) {
+    }, function (err, complexity) {
         if (err)
             res.send(err);
         res.json({ message: 'Complexity successfully deleted' });
