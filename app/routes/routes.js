@@ -43,7 +43,8 @@ module.exports = function (router) {
     .get(estFact.readAEstimationFactor);
   router.route('/estimatingfactors/getEstFactorsByCatId/:_id')
     .get(estFact.readEstimationFactorsByCatId);
-
+  router.route('/estimatingfactors/getEstFactorsByPageNo/:_id&:pageNo&:itemCount')
+    .get(estFact.listEstimationFactorsByPageAndLimit);
   router.route('/components')
     .get(component.listAllComponents)
     .post(component.createAComponent)

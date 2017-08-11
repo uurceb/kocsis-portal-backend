@@ -10,6 +10,32 @@ exports.listAllEstimationFactors = function (req, res) {
         res.json(estFacts);
     });
 };
+exports.listEstimationFactorsByPageAndLimit = function (req, res) {
+    var estFactorsResponse = { pageCount: 0, data: [] };
+
+    if (req.params._id === "*") {
+        EstimationFactor.count({}, function (err, count) {
+            estFactorsResponse.pageCount = Math.ceil(count/parseInt(req.params.itemCount));
+        });
+        EstimationFactor.find({}).populate('_category', 'categoryName').skip((parseInt(req.params.pageNo) - 1) * parseInt(req.params.itemCount)).limit(parseInt(req.params.itemCount)).exec(function (err, estFacts) {
+            if (err)
+                res.send(err);
+            estFactorsResponse.data = estFacts;
+            res.json(estFactorsResponse);
+        });
+    }
+    else {
+        EstimationFactor.count({ _category: req.params._id }, function (err, count) {
+            estFactorsResponse.pageCount = Math.ceil(count/parseInt(req.params.itemCount));
+        });
+        EstimationFactor.find({ _category: req.params._id }).populate('_category', 'categoryName').skip((parseInt(req.params.pageNo) - 1) * parseInt(req.params.itemCount)).limit(parseInt(req.params.itemCount)).exec(function (err, estFacts) {
+            if (err)
+                res.send(err);
+            estFactorsResponse.data = estFacts;
+            res.json(estFactorsResponse);
+        });
+    }
+};
 
 exports.createAEstimationFactor = function (req, res) {
     var newEstimationFactor = new EstimationFactor(req.body);
