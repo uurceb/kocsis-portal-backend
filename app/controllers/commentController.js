@@ -4,15 +4,15 @@ var Comment = require('../models/comment');
 var mongoose = require('mongoose');
 
 exports.listAllComments = function (req, res) {
-    Comment.find({}).populate('_user').exec(function (err, complexities) {
+    Comment.find({}).populate('_user','username').exec(function (err, complexities) {
         if (err)
             res.send(err);
         res.json(complexities);
     });
 };
 
-exports.readCommentsByProjectId = function (req, res) {
-    Comment.find({ _object: req.params._id }).populate('_user').exec( function (err, comments) {
+exports.readCommentsByObjectId = function (req, res) {
+    Comment.find({ _object: req.params._id }).populate('_user','username').exec( function (err, comments) {
         if (err)
             res.send(err);
         res.json(comments);

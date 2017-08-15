@@ -37,7 +37,8 @@ module.exports = function (router) {
   router.route('/estimatingfactors')
     .get(estFact.listAllEstimationFactors)
     .post(estFact.createAEstimationFactor)
-    .delete(estFact.deleteAEstimationFactor);
+    .delete(estFact.deleteAEstimationFactor)
+    .put(estFact.updateAEstimationFactor);
 
   router.route('/estimatingfactors/:_id')
     .get(estFact.readAEstimationFactor);
@@ -63,7 +64,7 @@ module.exports = function (router) {
     .post(category.createACategory)
     .delete(category.deleteACategory);
 
-    router.route('/projectstatus')
+  router.route('/projectstatus')
     .get(status.listAllStatus)
     .post(status.createAStatus)
     .delete(status.deleteAStatus);
@@ -81,11 +82,11 @@ module.exports = function (router) {
     .post(user.createAUser)
     .delete(user.deleteAUser);
 
-    router.route('/comments')
+  router.route('/comments')
     .get(comment.listAllComments)
     .post(comment.createAComment)
     .delete(comment.deleteAComment);
 
-    router.route('/comments/getCommentsByObjectId/:_id')
-    .get(comment.readCommentsByProjectId)
+  router.route('/comments/getCommentsByObjectId/:_id')
+    .get(comment.readCommentsByObjectId)
 };

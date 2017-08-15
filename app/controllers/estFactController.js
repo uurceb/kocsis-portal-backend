@@ -63,7 +63,7 @@ exports.readEstimationFactorsByCatId = function (req, res) {
 };
 
 exports.updateAEstimationFactor = function (req, res) {
-    EstimationFactor.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true }, function (err, estFact) {
+    EstimationFactor.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, function (err, estFact) {
         if (err)
             res.send(err);
         res.json(estFact);
