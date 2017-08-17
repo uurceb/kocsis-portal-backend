@@ -74,6 +74,9 @@ module.exports = function (router) {
     .post(inventoryItem.createAnInventoryItem)
     .delete(inventoryItem.deleteAnInventoryItem);
 
+    router.route('/inventoryitems/getInventoryItemsByPageNo/:_id&:pageNo&:itemCount')
+    .get(inventoryItem.listInventoryItemsByPageAndLimit);
+
   router.route('/inventoryitems/getInventoryItemsByProjectId/:_id')
     .get(inventoryItem.readInventoryItemsByProjectId)
 
