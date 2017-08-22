@@ -26,6 +26,13 @@ exports.readInventoryItemsByProjectId = function (req, res) {
         res.json(inventoryItems);
     });
 };
+exports.updateAnInventoryItem = function (req, res) {
+    InventoryItem.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, function (err, inventoryItem) {
+        if (err)
+            res.send(err);
+        res.json(inventoryItem);
+    });
+};
 
 exports.listInventoryItemsByPageAndLimit = function (req, res) {
     var inventoryItemResponse = { pageCount: 0, data: [] };

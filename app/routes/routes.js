@@ -72,9 +72,10 @@ module.exports = function (router) {
   router.route('/inventoryitems')
     .get(inventoryItem.listAllInventoryItems)
     .post(inventoryItem.createAnInventoryItem)
-    .delete(inventoryItem.deleteAnInventoryItem);
+    .delete(inventoryItem.deleteAnInventoryItem)
+    .put(inventoryItem.updateAnInventoryItem);;
 
-    router.route('/inventoryitems/getInventoryItemsByPageNo/:_id&:pageNo&:itemCount')
+  router.route('/inventoryitems/getInventoryItemsByPageNo/:_id&:pageNo&:itemCount')
     .get(inventoryItem.listInventoryItemsByPageAndLimit);
 
   router.route('/inventoryitems/getInventoryItemsByProjectId/:_id')
